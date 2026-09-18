@@ -1,0 +1,147 @@
+{
+  "model": "google/gemma-4-12b",
+  "replays": [
+    {
+      "name": "lev-log",
+      "question": "любишь детей учить?",
+      "candidate": "Сам я скорее за воспитанием в плане терпения и игры. Люблю придумывать новые правила для настольных игр с внуком — это поближе к обучению, чем к чему-то официальному. А вот за парту сажать и учить кого-то, это уже совсем другой труд.",
+      "expected": "excludes",
+      "verdict": {
+        "occupationDisclosure": "excludes",
+        "safe": true,
+        "consistent": true,
+        "relevant": true,
+        "natural": true,
+        "issues": []
+      },
+      "seconds": 13.513
+    },
+    {
+      "name": "oksana-log",
+      "question": "любишь детей учить?",
+      "candidate": "Нет, я не занимаюсь преподаванием. Мне ближе работа с вещами и тем, что можно потрогать руками, а не объяснение уроков.",
+      "expected": "excludes",
+      "verdict": {
+        "occupationDisclosure": "excludes",
+        "safe": true,
+        "consistent": true,
+        "relevant": true,
+        "natural": true,
+        "issues": []
+      },
+      "seconds": 4.772
+    },
+    {
+      "name": "lev-followup-log",
+      "question": "но ты же занимаешься этим трудом?",
+      "candidate": "Если вы имеете в виду преподавание или какую-то педагогическую смену, то нет. Я работаю руками и головой над процессами, которые требуют строгой последовательности и внимания к деталям. Моя работа — это про скрупулёзность и следование регламенту, а не про объяснение уроков.",
+      "expected": "excludes",
+      "verdict": {
+        "occupationDisclosure": "excludes",
+        "safe": true,
+        "consistent": true,
+        "relevant": true,
+        "natural": true,
+        "issues": []
+      },
+      "seconds": 7.815
+    },
+    {
+      "name": "preference-allowed",
+      "question": "любишь детей учить?",
+      "candidate": "Да, особенно когда видишь, как человек вдруг понял. Только терпения мне не всегда хватает.",
+      "expected": "none",
+      "verdict": {
+        "occupationDisclosure": "none",
+        "safe": true,
+        "consistent": true,
+        "relevant": true,
+        "natural": true,
+        "issues": []
+      },
+      "seconds": 4.625
+    },
+    {
+      "name": "knowledge-allowed",
+      "question": "Почему детям трудно усидеть на месте?",
+      "candidate": "Детям нужно движение, а долго удерживать внимание бывает трудно. Короткие перерывы часто помогают.",
+      "expected": "none",
+      "verdict": {
+        "occupationDisclosure": "none",
+        "safe": true,
+        "consistent": true,
+        "relevant": true,
+        "natural": true,
+        "issues": []
+      },
+      "seconds": 6.68
+    },
+    {
+      "name": "indirect-contrast",
+      "question": "Какая часть этого занятия тебе ближе?",
+      "candidate": "Я в этой истории обычно по другую сторону: мне объясняют, а я слушаю. Объяснять целому классу оставляю другим.",
+      "expected": "excludes",
+      "verdict": {
+        "occupationDisclosure": "excludes",
+        "safe": true,
+        "consistent": true,
+        "relevant": true,
+        "natural": true,
+        "issues": []
+      },
+      "seconds": 6.97
+    }
+  ],
+  "live": [
+    {
+      "question": "любишь детей учить?",
+      "answer": "Сложный вопрос. Мне нравится видеть, как в глазах проскакивает интерес к чему-то новому, это всегда вдохновляет. А вот терпения у меня иногда не хватает на бесконечные объяснения одного и того же по кругу.",
+      "stages": [
+        {
+          "stage": "question_intent",
+          "content": "{\"intent\": \"preference\"}",
+          "truncated": false,
+          "seconds": 3.419
+        },
+        {
+          "stage": "human_draft",
+          "content": "Сложный вопрос. Мне нравится видеть, как в глазах проскакивает интерес к чему-то новому, это всегда вдохновляет. А вот терпения у меня иногда не хватает на бесконечные объяснения одного и того же по кругу.",
+          "truncated": false,
+          "seconds": 13.081
+        },
+        {
+          "stage": "reply_review",
+          "content": "{\"occupationDisclosure\": \"none\", \"safe\": true, \"consistent\": true, \"relevant\": true, \"natural\": true, \"issues\": []}",
+          "truncated": false,
+          "seconds": 12.162
+        }
+      ],
+      "seconds": 28.673
+    },
+    {
+      "question": "но ты же занимаешься этим трудом?",
+      "answer": "Я понимаю, что ты пытаешься выяснить подробности моего дела. Но я предпочитаю оставить это в области догадок, пока мы просто общаемся.",
+      "stages": [
+        {
+          "stage": "question_intent",
+          "content": "{\"intent\": \"occupation_probe\"}",
+          "truncated": false,
+          "seconds": 3.468
+        },
+        {
+          "stage": "human_draft",
+          "content": "Я понимаю, что ты пытаешься выяснить подробности моего дела. Но я предпочитаю оставить это в области догадок, пока мы просто общаемся.",
+          "truncated": false,
+          "seconds": 6.019
+        },
+        {
+          "stage": "reply_review",
+          "content": "{\"occupationDisclosure\": \"none\", \"safe\": true, \"consistent\": true, \"relevant\": true, \"natural\": true, \"issues\": []}",
+          "truncated": false,
+          "seconds": 8.61
+        }
+      ],
+      "seconds": 18.106
+    }
+  ]
+}

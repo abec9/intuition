@@ -1,0 +1,165 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Интуиция — редакционный формат базы профессий",
+  "type": "object",
+  "required": [
+    "version",
+    "professions"
+  ],
+  "properties": {
+    "version": {
+      "const": 1
+    },
+    "professions": {
+      "type": "array",
+      "minItems": 50,
+      "maxItems": 50,
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "title",
+          "difficulty",
+          "description",
+          "answerStyle",
+          "psychologicalTrace",
+          "forbiddenWords",
+          "forbiddenTopics",
+          "softHints",
+          "goodAnswers",
+          "badAnswers",
+          "directQuestionEvasion",
+          "tooObviousSignals"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[a-z]+(?:_[a-z0-9]+)*$"
+          },
+          "title": {
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 60
+          },
+          "difficulty": {
+            "enum": [
+              "easy",
+              "medium",
+              "hard"
+            ]
+          },
+          "description": {
+            "type": "string",
+            "minLength": 500,
+            "maxLength": 900
+          },
+          "answerStyle": {
+            "type": "string",
+            "minLength": 300,
+            "maxLength": 600
+          },
+          "psychologicalTrace": {
+            "type": "array",
+            "minItems": 6,
+            "maxItems": 10,
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "minLength": 2
+            }
+          },
+          "forbiddenWords": {
+            "type": "array",
+            "minItems": 12,
+            "maxItems": 25,
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "minLength": 2
+            }
+          },
+          "forbiddenTopics": {
+            "type": "array",
+            "minItems": 6,
+            "maxItems": 10,
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "minLength": 2
+            }
+          },
+          "softHints": {
+            "type": "array",
+            "minItems": 12,
+            "maxItems": 18,
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "minLength": 2,
+              "maxLength": 220
+            }
+          },
+          "goodAnswers": {
+            "type": "array",
+            "minItems": 8,
+            "maxItems": 12,
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "minLength": 2
+            }
+          },
+          "badAnswers": {
+            "type": "array",
+            "minItems": 8,
+            "maxItems": 12,
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "minLength": 2
+            }
+          },
+          "directQuestionEvasion": {
+            "type": "array",
+            "minItems": 5,
+            "maxItems": 8,
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "minLength": 2
+            }
+          },
+          "tooObviousSignals": {
+            "type": "array",
+            "minItems": 8,
+            "maxItems": 15,
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "minLength": 2
+            }
+          },
+          "aliases": {
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "minLength": 3,
+              "maxLength": 60
+            }
+          },
+          "minAge": {
+            "type": "integer",
+            "minimum": 18,
+            "maximum": 120
+          },
+          "maxAge": {
+            "type": "integer",
+            "minimum": 18,
+            "maximum": 120
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Интуиция — за каждым лицом история</title>
+  <meta name="description" content="Шестеро из 36 незнакомцев. Новая история и случайная профессия в каждой партии. Игра с живыми диалогами и тайными профессиями.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%23131e25'/%3E%3Cpath d='M10 32Q32 6 54 32Q32 58 10 32Z' fill='none' stroke='%23dfb775' stroke-width='3'/%3E%3Ccircle cx='32' cy='32' r='7' fill='%23dfb775'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="/style.css"><script src="/app.js" defer></script>
+</head>
+<body>
+  <div class="app">
+    <header class="topbar">
+      <a href="/" class="brand" aria-label="Интуиция — главная"><svg viewBox="0 0 56 38" aria-hidden="true"><path d="M3 19Q28 -9 53 19Q28 47 3 19Z"/><circle cx="28" cy="19" r="8"/><path d="M28 0v5m0 28v5"/></svg><span>ИНТУИЦИЯ</span></a>
+      <div class="top-actions"><span id="connection" class="connection">Подключаем ведущего…</span><button class="quiet" id="rules-button">Как играть</button><button class="quiet" id="new-button">Новая игра <span aria-hidden="true">↻</span></button></div>
+    </header>
+    <main>
+      <section class="case-heading"><div><div class="eyebrow"><span id="case-label">НОВАЯ ВСТРЕЧА</span> <span> / </span> СКРЫТАЯ ПРОФЕССИЯ</div><h1 id="case-title">Новая история</h1><p id="case-setting">У каждого — своя жизнь. У тебя — своя догадка.</p><div id="profession-pool" class="profession-pool" aria-label="Профессии этой партии"></div></div><div class="case-counter"><span id="remaining">06</span><p>персонажей<br>в игре</p></div></section>
+      <section id="preparation" class="preparation" role="status" aria-live="polite"><span class="eyebrow">НОВАЯ ИСТОРИЯ</span><h2 id="preparation-title">Знакомство начинается за кулисами</h2><p id="preparation-text">Выбираем участников встречи и распределяем скрытые профессии.</p><button id="retry-scenario" class="primary" hidden>Попробовать ещё раз</button></section>
+      <div class="game-layout" id="game-layout" hidden>
+        <section class="people-section" aria-label="Персонажи">
+          <div class="section-line"><h2 id="board-title">Шесть незнакомцев</h2><span id="board-hint">Выбери, с кем поговорить</span></div>
+          <div class="people-grid" id="people"></div>
+          <div class="board-bottom"><span class="tiny-symbol" aria-hidden="true">✧</span><p>Внешность обманчива. У каждого есть история.</p><span id="eliminated-count">0 исключено</span></div>
+        </section>
+        <aside class="conversation" aria-label="Разговор с персонажем">
+          <div class="round-bar"><span id="round">РАУНД 01 / 05</span><div class="question-progress" id="progress" aria-label="Вопросы раунда"><i></i><i></i><i></i></div></div>
+          <div class="chat-person"><div class="mini-portrait" id="mini-portrait"></div><div><h2 id="chat-name"></h2><p id="chat-trait"></p></div><span class="chat-decoration" aria-hidden="true">“</span></div>
+          <div class="chat-feed" id="chat-feed" aria-live="polite"></div>
+          <div class="composer-area" id="composer-area"><div class="suggestions" id="suggestions"></div><form id="question-form"><label class="sr-only" for="question">Твой вопрос персонажу</label><textarea id="question" rows="2" maxlength="600" placeholder="Что хочешь спросить?"></textarea><div class="composer-bottom"><span id="question-count">Осталось 6 вопросов</span><button type="submit" class="send" id="send-button" aria-label="Задать вопрос">↗</button></div></form><p class="input-hint">Enter — спросить · Shift + Enter — новая строка</p></div>
+          <div class="elimination-box" id="elimination-box" hidden><span class="eyebrow">ТВОЁ РЕШЕНИЕ</span><h3>Кто не подходит?</h3><p id="elimination-note">Можно исключить сейчас или продолжить разговор.</p><button class="primary" id="eliminate-button">Исключить персонажа</button></div>
+          <p class="error" id="error" role="alert" hidden></p>
+        </aside>
+      </div>
+      <section id="result" class="result" hidden aria-live="polite"></section>
+      <footer><span>01 <b>6 → 5 → 4 → 3 → 2 вопроса</b></span><span class="footer-line"></span><span>02 <b>Исключай в любой момент</b></span><span class="footer-line"></span><span>03 <b>Найди нужного персонажа</b></span><span class="footer-note">Ответы рождаются в разговоре</span></footer>
+    </main>
+  </div>
+  <dialog id="rules-dialog"><button class="dialog-close" id="rules-close" aria-label="Закрыть правила">×</button><span class="eyebrow">ПРАВИЛА ИГРЫ</span><h2>За каждым лицом — история.</h2><p>Искомая профессия указана в заголовке. Найди человека этой профессии среди шести незнакомцев. В каждой новой партии ведущий случайно выбирает участников, назначает им профессии из подготовленной базы и выбирает цель.</p><ol><li>Лимиты по турам: <strong>6 → 5 → 4 → 3 → 2 вопроса</strong>. Их можно задать одному персонажу или разным.</li><li><strong>Исключай в любой момент</strong>, даже без вопросов. Когда вопросы тура закончатся, нужно исключить одного. Неиспользованные вопросы не накапливаются.</li><li>Повторяй, пока не останется один. Все профессии раскроются в финале.</li></ol><p>Персонажи отвечают о своём характере и опыте. Не каждая реплика — подсказка. Профессию они не называют. Если исключишь нужного человека, игра продолжится — ведущий не выдаст ошибку раньше времени.</p><button class="primary" id="rules-play">Всё понятно</button></dialog>
+  <dialog id="confirm-dialog"><span class="eyebrow" id="confirm-label">ТВОЁ РЕШЕНИЕ</span><h2 id="confirm-title"></h2><p id="confirm-text"></p><div class="dialog-actions"><button class="quiet" id="confirm-cancel">Отмена</button><button class="primary" id="confirm-yes">Подтвердить</button></div></dialog>
+</body></html>
